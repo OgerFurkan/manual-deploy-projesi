@@ -115,7 +115,7 @@ jobs:
     if: (github.ref_type == 'tag' && github.event_name == 'push') || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
     environment:
       name: production
-      url: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+      url: https://${{ github.repository_owner }}.github.io/${{ github.repository.name }}/
     permissions:
       contents: write
       deployments: write
