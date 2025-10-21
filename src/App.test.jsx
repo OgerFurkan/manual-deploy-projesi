@@ -14,11 +14,18 @@ test("Test Button Disabled State", () => {
 });
 
 test("Input Changes Enable Button", async () => {
-	render(<App />);
-	const inputNameElement = screen.getByPlaceholderText(/İsim/i);
-	const inputSurnameElement = screen.getByPlaceholderText(/Soyisim/i);
-	const buttonElement = screen.getByRole("button");
-	await user.type(inputNameElement, "Furkan");
-	await user.type(inputSurnameElement, "Öger");
+	const user = userEvent.setup();
+	render(<NameForm />);
+
+	const buttonElement = screen.getByRole("button", { name: /Gönder/i });
+	const nameInput = screen.getByLabelText(/isim:/i);
+	const surnameInput = screen.getByLabelText(/soyisim:/i);
+
+	await user.type(nameInput, "Furkan");
+	await user.type(surnameInput, "Öger");
+
 	expect(buttonElement).toBeEnabled();
+
+	await user.clear(nameInput);
+	expect(buttonElement).toBeDisabled();
 });
