@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
-import userEvent from "@testing-library/user-event";
 
 test("check header", () => {
 	render(<App />);
@@ -14,19 +13,16 @@ test("Test Button Disabled State", () => {
 	expect(buttonElement).toBeDisabled();
 });
 
-test("Input Changes Enable Button", async () => {
-	const user = userEvent.setup();
-	render(<NameForm />);
-
+test("Inputlar doldurulduğunda buton aktif olmalı ve silindiğinde pasif olmalı", () => {
+	render(<App />);
 	const buttonElement = screen.getByRole("button", { name: /Gönder/i });
-	const nameInput = screen.getByLabelText(/isim:/i);
-	const surnameInput = screen.getByLabelText(/soyisim:/i);
+	const nameInput = screen.getByPlaceholderText(/İsim/i);
+	const surnameInput = screen.getByPlaceholderText(/Soyisim/i);
 
-	await user.type(nameInput, "Furkan");
-	await user.type(surnameInput, "Öger");
-
+	fireEvent.change(nameInput, { target: { value: "Furkan" } });
+	fireEvent.change(surnameInput, { target: { value: "Öger" } });
 	expect(buttonElement).toBeEnabled();
 
-	await user.clear(nameInput);
+	fireEvent.change(nameInput, { target: { value: "" } });
 	expect(buttonElement).toBeDisabled();
 });
