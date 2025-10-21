@@ -4,7 +4,11 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [name, setName] = useState("");
+	const [surname, setSurname] = useState("");
+	const isInputsValid = () => {
+		return name.trim().length > 0 && surname.trim().length > 0;
+	};
 
 	return (
 		<>
@@ -18,14 +22,23 @@ function App() {
 			</div>
 			<h1>Manuel Deploy Projesi!</h1>
 			<p>sürüm: 1.0.2</p>
-			<div className="card">
-				<button type="button" onClick={() => setCount((count) => count + 1)}>
-					count is {count}
+			<form action="">
+				<input
+					type="text"
+					placeholder="İsim"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+				<input
+					type="text"
+					placeholder="Soyisim"
+					value={surname}
+					onChange={(e) => setSurname(e.target.value)}
+				/>
+				<button type="button" disabled={!isInputsValid()}>
+					Gönder
 				</button>
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
+			</form>
 			<p className="read-the-docs">
 				Click on the Vite and React logos to learn more
 			</p>
