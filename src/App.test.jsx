@@ -11,10 +11,14 @@ test("Test Button Disabled State", () => {
 	render(<App />);
 	const buttonElement = screen.getByRole("button", { name: /Gönder/i });
 	expect(buttonElement).toBeDisabled();
+});
 
-	const nameInput = screen.getByPlaceholderText("İsim");
-	const surnameInput = screen.getByPlaceholderText("Soyisim");
-	nameInput.fireEvent.change({ target: { value: "Furkan" } });
-	surnameInput.fireEvent.change({ target: { value: "Öger" } });
+test("Input Changes Enable Button", () => {
+	render(<App />);
+	const inputNameElement = screen.getByPlaceholderText(/İsim/i);
+	const inputSurnameElement = screen.getByPlaceholderText(/Soyisim/i);
+	const buttonElement = screen.getByRole("button");
+	inputNameElement.value = "Furkan";
+	inputSurnameElement.value = "Öger";
 	expect(buttonElement).toBeEnabled();
 });
