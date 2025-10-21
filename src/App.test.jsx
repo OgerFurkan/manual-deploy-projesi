@@ -13,12 +13,12 @@ test("Test Button Disabled State", () => {
 	expect(buttonElement).toBeDisabled();
 });
 
-test("Input Changes Enable Button", () => {
+test("Input Changes Enable Button", async () => {
 	render(<App />);
 	const inputNameElement = screen.getByPlaceholderText(/İsim/i);
 	const inputSurnameElement = screen.getByPlaceholderText(/Soyisim/i);
 	const buttonElement = screen.getByRole("button");
-	inputNameElement.value = "Furkan";
-	inputSurnameElement.value = "Öger";
+	await user.type(inputNameElement, "Furkan");
+	await user.type(inputSurnameElement, "Öger");
 	expect(buttonElement).toBeEnabled();
 });
