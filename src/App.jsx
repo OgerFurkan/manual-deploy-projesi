@@ -21,7 +21,7 @@ function App() {
 				</a>
 			</div>
 			<h1>Manuel Deploy Projesi!</h1>
-			<p>sürüm: 1.1.2</p>
+			<p>sürüm: 1.1.3</p>
 			<form action="">
 				<input
 					type="text"
