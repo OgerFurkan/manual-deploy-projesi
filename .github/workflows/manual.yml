@@ -13,9 +13,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Deploy edilecek etiket (tag) adını girin (v1.0.0 formatında):'
+        description: 'Deploy edilecek etiket (tag) adını girin (v1.1.1 formatında):'
         required: true
-        default: 'v1.0.0'
+        default: 'v1.1.1'
       environment:
         description: 'Hangi ortama deploy edilecek?'
         required: true
